@@ -1,0 +1,85 @@
+C PROGRAMMING (CONT)
+-------------------
+
+Can cast in C
+
+Unary assignments:
+++
+--
+*=
+
+Bitwise operations
+& - And
+| - Or
+^ - Xor
+~ - Not
+>> - Right shift
+<< - Left shift
+
+Shifting is faster than multiplying,
+so if operating with powers of two, you should
+use a bit shift rather than a multiplication
+
+The Forever Loop:
+Typically frowned upon in CS,
+in Embedded systems, they are very useful
+
+while(1):
+
+C is a modular programming language
+- Definitions at top of file
+- Templates for function definition
+- Actual functions
+- Main function
+
+OF INTEGERS AND ENDIANS
+-----------------------
+1 byte = 8 bits 
+- ASCII char, one of 256 alphanumeric or other text characters 'C' = 67 -> 010010011
+- 1 small integer 67 -> 010010011
+- 2 binary coded decimal digits (one per nibble) 67 -> 0110 0111
+- 2 hexadecimal digits 67 -> 0x43 -> 0100 0011
+- 8 individual bits
+
+1/2 byte = 1 nibble = 4 bits
+1 word = 2 (or more) bytes 
+1 double word = 2 words (4 bytes on MSP430
+
+Converting between bases and formats:
+Decimal to binary:
+- Successive Division
+- Starting with whole decimal #, divide by 2
+- Keep track of remainders
+First division with remainder 1 is most significant bit
+Last one is least significant bit
+- Pad with 0s
+
+Signing an integer
+The MSB can be used to designate a sign to an integer
+A 0xxxxxx.... is positive
+A 1xxxxxx.... is negative
+However, there are 2 types of 0, this is a problem for processors
+
+Two's complement integers
+- More common format for signed integers
+- n bits, values run from -2^n-1 to 2^n-1 -1
+
+Positive same as unsigned integer
+
+Negative numbers:
+- Encode magnitude
+- Complement each bit
+- Add 1
+
+-15 -> 0000 0000 0000 1111 -> 1111 1111 1111 0000 -> 1111 1111 1111 0001 
+
+Range for 2s
+16 bits: -32768 to 32767
+
+32767 = 0111 1111 1111 1111
+...
+1 = 0000 0000 0000 0001
+0 = 0000 0000 0000 0000
+-1 = 1111 1111 1111 1111
+...
+-32768 = 1000 0000 0000 0000

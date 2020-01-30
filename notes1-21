@@ -1,0 +1,74 @@
+Represent -5.375 as a single precision number -5.375
+
+1. Convert it to fixed point representation
+	-5.375 = -101.011 -> -(5+.25+.125)
+2. Shift to put the bit representation into mantissa bit format:
+	1.FFFF...
+	-101.011 -> 1.01011 * 2^2
+S = 1
+E = Exponent + 127 = 2 + 127 =129
+M = 01011000...0 (Leading 1 is not included)
+
+Floating Point Precision
+------------------------
+
+IEEE Standard
+# precision digits -> 1.F -> 1+23 = 24
+	log10 2^24 ~ 7 digits of precision
+# of representations
+	2 * (2^8-2) * 2^23
+	EXP -> 1111 1111 -> infinity, NAN
+	EXP -> 0000 0000 0> 0.F -> subnormal numbers
+
+Range: ~ +-10^38
+Subnormal number range ~ +-10^-45
+
+Endianness
+----------
+
+Computers store information in memory
+- Each memory location holds 1 byte
+
+How do we store types in multiple bytes?
+See Table in Lecture for examples
+
+Little Endian
+Least significant byte (LSB) of a word is stored in the lower memory address
+- Low Byte -> Low Memory address
+- High Byte -> Higher memory address
+
+A memory dump from CCS shows addresses left to right starting with 02400h,
+bytes will appear out of order when read L to R
+
+Big Endian
+Most significant byte (MSB) of a word is stored in the lower memory address
+- High byte -> Lower memory address
+- Low byte -> Higher memory address
+
+Now the memory dump will have the bytes in order since it will be read L to R
+
+Endianess refers to the order of bytes, it is processor specific and not memory
+- MSP430 uses little endian
+
+Array and Endianness
+--------------------
+Endian conventions determin how multi-byte data is store in memory
+Big endian = MSB first
+Little endian = LSB first
+Endian convention does not alter the order of elements in an array
+
+Example
+
+unsigned in a = 0x00FF;
+long in b[2] = {65540, 8201};
+char c = 'C';
+
+Address | Little Endian | Big Endian
+... for b[1], c
+2405      0x00            0x04
+2404      0x01            0x00
+2403      0x00            0x01
+2402      0x04			  0x00
+
+2401      0x00			  0xFF
+2400      0xFF			  0x00

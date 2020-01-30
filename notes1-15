@@ -1,0 +1,33 @@
+Introduction to the Course
+-------------------------
+Embedded Systems - a computer within a product
+
+Hierarchy of Computing:
+1. Embedded Controllers
+2. PC
+3. Mainframe/Server
+4. Supercomputer
+
+Characteristics of an Embedded System:
+- Performs a small set of tightly coupled functions
+- Often larger system that is not a computer
+- Must work in real time (often)
+- Is a mix of hardware and software
+
+- Not a PC style microprocessor
+- Typically used for a special purpose
+- Low level but high percentage
+
+- Historically had no operating system, but now can
+- Executable code needs to be downloaded from another platform
+- SW tailored for HW
+
+What will be learned
+- Hardware (architecture)
+- CPU, Memory, I/O device organization
+- Software (C)
+- Learning to use a TI MSP430 microcontroller
+
+There are >300 million PC-style microprocessor units produced in a year
+There are 8 billion embedded units produced in that year
+They have speed, small size, low power, and are unique

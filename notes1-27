@@ -1,0 +1,93 @@
+MSP430 Digital I/O
+------------------
+
+Pins can be configured to be input or output individually
+An 8 bit port can also be configured to be 16 bit
+
+Each port is controlled by six byte addressable regusters
+
+All the I/O port regusters are memory mapped meaning each register associated
+with an IO port or other perfipheral device has a unique address in memory
+
+Digital I/O Registers
+---------------------
+Function Select Registers
+PxSEL bit is used to select the pin function - I/O port or peripheral module function
+Bit = 0: I/O function
+Bit = 1: Peripheral module function
+Ex: P3SEL = 0xF0
+Access port 3, top 4 pins are set to peripherals, bottom 4 pins are set to I/O
+
+Direction Register
+PxDIR resgister selects the direction of the corresponding I/O pin
+Bit = 0: Port pin is set to input
+Bit = 1: Port pin is set to output
+
+Input Registers
+PxIN register reflects the value of the input signal at the corresponding I/O pin when the pin is configured as I/O function
+Bit 0 is low
+Bit 1 is high
+
+Output Registers
+PxOUT reguster is the value to be output on the corresponding I/O pin when the pin is confugured as I/O function
+Bit 0 is low
+Bit 1 is high
+ 
+Output Drive Strenght Registers
+PxDS register selects either full drive or reduced drive
+0 is reduced
+1 is full
+
+Pullup or Pulldown Resistor Enable Registers
+PxREN register enables or disables the pullup/pulldown resistor of the corresponding I/O pin
+The corresponding bit in teh PxOUT register selects if the pin contains a pullup or pulldown
+Bit 0 = pullup/pulldown resistor disabled
+Bit 1 = pullup/pulldown resistor enabled
+
+PxDIR PxREN pxOUT I/O
+0     0     X     Input
+0     1     0     Input with pulldown resistor
+0     1     1     Input with pullup resistor
+1     X     X     Output
+
+Using the I/O ports is conceptually simple
+Read or write desired values from/to the register names associeated with the port
+
+Make extensive use of C's Bitwise operations -> & | ~ 
+
+X and 0 = 0
+X and 1 = X
+X or 1 = 1
+X or 0 = X
+~ will invert the bit
+
+Example:
+
+P3SEL = P3SEL & 0x0C;
+P3DIR = P3DIR | 0xF0;
+P3DIR = P3DIR & 0xFC;
+
+Avoiding "Magic Numbers"
+In C, there is always multiple ways to implememnt the same functionality
+Some ways are accepted as representing better coding sytle
+- Try to avoid "magic numbers" fixed hard-coded numbers that appear in code without explanation of their meaning or purpose
+These values are predefined in the MSP430f5529.h header fule, we can just use them
+
+BIT0 = 0000 0001
+BIT1 = 0000 0010
+...
+BIT6 = 0100 0000
+BIT7 = 1000 0000
+
+BIT2|BIT3 = 0000 1100
+
+Combine the bits to create masks:
+
+P3SEL = P3SEL & (BIT2|BIT3); //=0000 XX00
+P3DIR = P3DIR | (BIT7|BIT6|BIT5|BIT4); //=1111 XX00
+...
+
+
+
+
+

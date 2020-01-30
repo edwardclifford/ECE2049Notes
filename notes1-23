@@ -1,0 +1,127 @@
+Getting to know the Hardware
+----------------------------
+MSP430F5529 Architecture and Memory Map
+
+In a programming course - Typically its all about the code
+1. Read in data
+2. Manipulate data
+3. Output/Store data
+
+Developing software for embedded systems requires much more in-depth knowledge of target microprocessor
+- Need to understand architecture of the processor
+- How and Where code and data is stored
+- How much memory & what resources are available
+
+Use constructs
+- Loops, arithmetic operations, searches, if-then-else, sorts, calculate
+Software: Write function & syntax correctly and it will run
+Use library functions for I/O read(), getchar(), send(), printf(), putchar()...
+
+Developing SW requires knowledge of the target system:
+- Architecture of the processor
+- How and where code is stored
+- How much memory and what resources are available
+
+General Microprocessor System HW Architecture
+---------------------------------------------
+
+CPU
+- Brains of the computer 
+- Executes program instructions
+- Provides timing
+- Controls/Directs operation of memory and peripherals
+
+Memory
+- Stores binary information
+- Under control of CPU
+- Two main types
+    - Non-volatile -> ROM/FLASH (code memory)
+    - Volatile -> RAM (data memory)
+
+Peripherals
+- Everything that's not memory
+- Provide means of exchanging data with the I/O devices
+- I/O Access is similar to Memory Access in Embedded Systems
+	- Memory mapped Peripherals
+
+CPU, Memory, Peripherals connected through
+- data lines, address lines & control lines
+
+Bus
+- Multiple connections in parallel
+
+General Purpose Computing HW/SW Hierarchy
+
+Applications
+(Office, Matlab)
+Operating system
+(Win 10, Linux, MacOs)
+System SW
+(Device Drivers, BIOS)
+System HW
+
+Embedded Computing Hierarchy
+
+Application (singular)
+Operating System/OS
+HW Layer - CPU, MEM, Peripherals
+
+Architectures
+-------------
+
+Von Nuemann
+- Same memory for data and instruction
+- Data and instruction fetch happens on different times
+- Easier and cehaper development
+- Used by most general purpose processors
+- MSP430
+
+Harvard Architecture
+- Separate Memory for Data and Instruction
+- data and Instruction Fetch happens at the same time
+- More complicated and costlier development
+
+MSP430F5529
+-----------
+
+Block Diagram
+MSP430 family contains over 100 versions of this CPU with various memory/peripheral configurations
+- System on a chip
+- MAP -> Memory Address Bus
+- MDB -> Memory Data Bus
+
+F5529
+- 128 Kb Flash memory > Code storage
+- 8 Kb RAM > Data storage
+- LCD controller
+- 32-bit Hardware multiplier, serial interfaces, analog to digital converter and a slew of other peripherals
+- Multiple timers, comparator, USB controller, DMA, general IO ports
+
+Memory Organization
+>> Memory = group of sequential locations where binary data is stored
+- In MSP430, each memory location holds 1 byte
+- Words are aligned with even addresses
+	- Low byte always stored at even address
+
+Addr 02401h = F3h
+Addr 02400h = 07h
+
+Word = F307h
+Addr= 02400h
+
+RAM
+- 8kb
+- Read and Write = retrieving or writing data to/from RAM (under programming control)
+- (MSP430F5529 has a RAM retention low power mode)
+
+Flash
+- 128 kb
+- Fetch = retrieving of instruction from code memory
+- Flash is writable under program control
+	- time required to write >> time required to read 
+	- Must by erased in multi-byte segments (512 bytes)
+
+MSP430 is 16-bit microcontroller
+- 16-bit word size => 16-bit internal regesters
+- 16-bit data bus
+>> BUT MSP430x5xxx and '6xxx families have and extended 20-bit memory address bus to allow access 1 mb...

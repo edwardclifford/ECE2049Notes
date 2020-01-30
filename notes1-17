@@ -1,0 +1,95 @@
+To Convert back to decimal with a negative binary number (Two's complement)
+Just use twos complement again
+
+Integer Range:
+Unsigned Int: 0 to 2^n -1
+Sign Magnitude: -(2^n-1 -1) to +(2^n-1 -1)
+Two's complement: -(2^n-1) to +(2^n-1 -1)
+
+Conversion Between Bases and Formats
+-----------------------------------
+Binary Coded Decimal
+- Legacy format, each decimal digit encoded in 4 bits
+	367 = 0000 0011 0110 0111
+
+Hexadecimal Numbers
+- 1 Hex character represent values from 0 to 15(d) using digits 0-F(h) 
+Know the binary (4 bits) to hex (1 character) conversions
+
+Converting 2590 to hex
+2590/16 = 161 R 14
+161/16 = 10 R 1
+10/16 = 0 R 10
+0A1E
+
+Conversion between hex and binary is a piece of cake
+- Just convert each hex digit into a binary nibble
+
+Converting 8008h to:
+
+Unsigned integer
+1000 0000 0000 1000
+2^15 + 2^3 = 32776
+
+2s Complement
+1000 0000 0000 1000
+^
+0111 1111 1111 0111
++                 1
+=
+0111 1111 1111 1000
+= -32760
+
+Sign-Magnitude integer
+First bit is 1 (negative)
+= -8
+
+BCD
+8    0    0    8 
+1000 0000 0000 1000
+
+ASCII
+8008h -> 80 08 (Then convert to ascii) = "Euro symbol" "backspace"
+
+Type Definitions and Sizes
+--------------------------
+The way variables are declared in a program depends on the device and the compiler
+
+int a; //16 bit signed (2's comp) integer
+float b; //32 bit IEEE floating point
+char c, h; //8 bit (unsigned) integer
+unsigned int d; //16 bit unsigned integer
+long int e; 16 bit signed integer (2's comp)
+double f; //64 bit IEEE floating point
+
+The Value stored in a variable cannot exceed the fixed variable size
+
+Fractional Number Encodings
+---------------------------
+Two types: Fixed point and Floating Point
+Fixed point creates a binary representation of a decimal by
+choosing a point in a binary number. Every bit left of the point is
+calculated by adding 2^-n depending on which bit you are at.
+
+4 Fractional bits = 2^-4 = 0.0625 = smallest fraction
+Often, data is just scaled to an integer
+
+- Easy to Calculate
+- Requires a lot of bits to represent large/small numbers
+- Eats up bits
+
+Floating Point Representation:
+Used to better approximate real valued decimal numbers
+Single Precision (32 bits): S EEEEEEEE FFFFFFFFFFFFFFFFFFFFFFF
+Sign Bit, 8 Exponent bits, 23 Mantissa
+Value = (-1)^s 2^(E-127) (1.F)
+
+Example:
+What is the floating point representaion of CAAA0000h?
+1100 1010 1010 1010 0000 0000 0000 0000
+1 10010101 01010100000000000000000
+S = 1
+E = 10010101 -> 95h = 149
+M = 1.010101 -> 1+2^2+2^-4+2^-6=1.328125
+
+V = -1.328125 * 2^(149-127) = ...
