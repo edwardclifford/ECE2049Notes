@@ -1,0 +1,44 @@
+More Clocks and Timers
+----------------------
+MSP430 Clock module is very capable, wide variety of clocking options under software controler
+Unified Clock System (UC) --5 possible Clock sources
+- XT1CLK
+- XT2CLK
+- DCOCLK
+- VLOCLK
+Provides 3 clock signals to CPU and peripherals
+On reset they default to the following
+(See slide show, know these defaults)
+
+Timers
+------
+Digital curcuit block that counts clock ticks
+Digital circuit that is separate from CPU
+
+Modes
+Unidirectionsal mode (Up mode) = count from 0 to a programmer set maximum count
+Continuous mode = Counts from 0 to full count of timers (8, 12, or 16 bits)
+Yp/Down mode = counts from 0 to max then back to 0
+
+Interrupts
+----------
+Signal to the CPU from a peripheral or other external sources
+- Typically either a request for service from the CPU or a notification that peripheral has something (data) for the CPU
+- CPU chooses to accept or ignore interrupts
+	- Except non-maskable Interrupts: power faults or oscillator faults
+- What will an interrupt from a timer mean?
+	- That a fixed amount of time has elapsed
+
+MSP430 - General Purpose Timers
+- Timer B
+	- Used by Graphics Library
+- Timer A0
+- Timer A1
+- Timer A2
+- Basic Timer
+- Watchdog Timer
+	- When it's on, the WDT must continually have its count reset within the program
+	- If the WDT is ON and its count get to 0 it will reboot the MSP430
+	- Which is why the first instruction in your main() should be:
+	WDTCTL = WDTPW + WDTHOLD;
+
