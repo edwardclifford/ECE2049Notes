@@ -1,0 +1,3 @@
+iii. The integer math program uses half of the memory that the float program does. This is due to integers taking up 2 bytes of space, wheras floats use 4. The integer math program will also execute faster, as the processor uses a hardware multiplier, which will vastly speed up processing. The float program must use the math.h lib for the MSP430, which is an emulation of exponetiation.
+
+iv. The pow() function consumes 2 doubles and returns a double. This means, in order to yse pow or sqrt() in a program, you must define the values you are operating on as floats. This costs more memory. Also, including math.h greatly increases the code base that needs to be compiled onto the MSP430.
